@@ -11,14 +11,14 @@ export class HitTargetComponent implements OnInit {
 
   isActive = false;
 
-  constructor(private tracker: TrackerService) {}
+  constructor(private trackerService: TrackerService) {}
 
   ngOnInit(): void {
     this.subscribeForDrawEvent();
   }
 
   private subscribeForDrawEvent() {
-    this.tracker.getDrawEventNotifier.subscribe((num) => {
+    this.trackerService.getDrawEventNotifier.subscribe((num) => {
       if (this.currentIndex === num + '') {
         this.isActive = true;
         
@@ -37,11 +37,11 @@ export class HitTargetComponent implements OnInit {
 
   onUserClick() {
     if (this.isActive) {
-      this.tracker.scoreUp();
+      this.trackerService.scoreUp();
       // avoid scoring more than once after it is acive.
       this.isActive = false;
     } else {
-      this.tracker.scoreDown();
+      this.trackerService.scoreDown();
     }
   }
 }
