@@ -1,40 +1,7 @@
 import React from "react";
 import "./App.css";
+import HitTarget from "./components/HitTarget/HitTarget";
 
-class HitRarget extends React.Component<any> {
-  private isActive = false;
-
-  constructor(props: any) {
-    super(props);
-  }
-
-  activeDisplayClass = () => {
-    if (this.props.target === this.props.currentTarget) {
-      this.isActive = true;
-    } else {
-      this.isActive = false;
-    }
-    if (this.isActive) {
-      return "circle activeitem";
-    } else {
-      return "circle";
-    }
-  };
-
-  onClick = () => {
-    if (this.isActive) {
-      this.props.scoreUp();
-    } else {
-      this.props.scoreDown();
-    }
-  };
-
-  render() {
-    return (
-      <span className={this.activeDisplayClass()} onClick={this.onClick}></span>
-    );
-  }
-}
 
 interface IAppState {
   totalHitTarget: number;
@@ -66,7 +33,7 @@ class App extends React.Component<any, IAppState> {
           currentTarget: -1,
         });
       } else {
-        this.setState({ currentTarget: -1, score:0 });
+        this.setState({ currentTarget: -1, score: 0 });
       }
     });
   };
@@ -104,13 +71,13 @@ class App extends React.Component<any, IAppState> {
   levelChange = (event: any) => {
     switch (event.target.value) {
       case "easy":
-        this.setState({totalHitTarget:3});
+        this.setState({ totalHitTarget: 3 });
         break;
       case "medium":
-        this.setState({totalHitTarget:5});
+        this.setState({ totalHitTarget: 5 });
         break;
       case "hard":
-        this.setState({totalHitTarget:8});
+        this.setState({ totalHitTarget: 8 });
         break;
     }
   };
@@ -119,7 +86,7 @@ class App extends React.Component<any, IAppState> {
     let targets = [];
     for (let i = 0; i < this.state.totalHitTarget; i++) {
       targets.push(
-        <HitRarget
+        <HitTarget
           target={i}
           currentTarget={this.state.currentTarget}
           scoreUp={() => {
@@ -128,7 +95,7 @@ class App extends React.Component<any, IAppState> {
           scoreDown={() => {
             this.scoreDown();
           }}
-        ></HitRarget>
+        ></HitTarget>
       );
     }
     return targets;
