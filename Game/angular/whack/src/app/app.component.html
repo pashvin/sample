@@ -1,0 +1,19 @@
+<div id="outer">
+  <h1>Whack a mole!!</h1>
+  <label>Choose a level:</label>
+  <select (change)="onLevelChange($event)">
+    <option value="easy">Easy</option>
+    <option value="medium">Medium</option>
+    <option value="hard">Hard</option>
+  </select>
+  <button (click)="startstopGame()">{{ startstopTitle }}</button>
+  <div class='score-data'>Total Score : {{ totalScore }}</div>
+  <section>
+    <div *ngIf="!isUserWon" class="target-container">
+      <span *ngFor="let x of [].constructor(totalTarget); let i = index">
+        <hit-target currentIndex="{{ i }}"></hit-target>
+      </span>
+    </div>
+  </section>
+  <h1 *ngIf="isUserWon">You Won!!</h1>
+</div>

@@ -1,0 +1,20 @@
+.target-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+  padding-bottom: 30px;
+}
+
+#outer {
+  background-color: green;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  border-radius: 25px;
+}
+
+.score-data {
+  margin-top: 20px;
+}
