@@ -31,7 +31,7 @@ class HitRarget extends React.Component<any> {
 
   render() {
     return (
-      <div className={this.activeDisplayClass()} onClick={this.onClick}></div>
+      <span className={this.activeDisplayClass()} onClick={this.onClick}></span>
     );
   }
 }
@@ -153,7 +153,7 @@ class App extends React.Component<any, IAppState> {
         ) : (
           <section>
             <div className="target-container">
-              <span>{this.createHitTargets()}</span>
+              {this.createHitTargets()}
             </div>
           </section>
         )}
