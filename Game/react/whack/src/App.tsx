@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import HitTarget from "./components/HitTarget/HitTarget";
+import HitTarget from "./HitTarget/HitTarget";
 
 
 interface IAppState {
