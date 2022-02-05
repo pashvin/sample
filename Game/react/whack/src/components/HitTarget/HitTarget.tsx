@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './HitTarget.module.css';
+import './HitTarget.css';
 
 interface HitTargetProps {}
 
