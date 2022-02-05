@@ -9,40 +9,40 @@ import { TrackerService} from './service/tracker.service';
 export class AppComponent {
 
 
-  constructor(private tracker : TrackerService) {
+  constructor(private trackerService : TrackerService) {
     
   }
 
   get totalTarget() :number {
-    return this.tracker.totalTargets;
+    return this.trackerService.totalTargets;
   }
 
   get totalScore() : number {
-    return this.tracker.score;
+    return this.trackerService.score;
   }
 
   get startstopTitle() : string {
-    return this.tracker.isGameActive ? 'Stop' : 'Start';
+    return this.trackerService.isGameActive ? 'Stop' : 'Start';
   }
 
   get isUserWon() : boolean {
-    return this.tracker.isUserWon;
+    return this.trackerService.isUserWon;
   }
 
   public startstopGame() {
-    this.tracker.toggleGame();
+    this.trackerService.toggleGame();
   }
 
   onLevelChange(event: any) {
     switch (event.target.value) {
       case "easy":
-        this.tracker.totalTargets = 3;
+        this.trackerService.totalTargets = 3;
         break;
       case "medium":
-        this.tracker.totalTargets = 5;
+        this.trackerService.totalTargets = 5;
         break;
       case "hard":
-        this.tracker.totalTargets = 8;
+        this.trackerService.totalTargets = 8;
         break;
     }
   }
