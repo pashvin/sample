@@ -22,6 +22,6 @@ exec("tsc " + file + ".ts", (error, stdout, stderr) => {
       return;
     }
     console.log(stdout);
-    //exec("rm " + "*.js");
+    exec("rm " + "*.js");
   });
 });
