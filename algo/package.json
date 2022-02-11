@@ -1,0 +1,16 @@
+{
+  "name": "algo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "permutation.js",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  },
+  "scripts": {
+    "start":"node runts.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
