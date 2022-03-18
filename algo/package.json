@@ -8,7 +8,7 @@
     "typescript": "^4.5.5"
   },
   "scripts": {
-    "start": "node runts.ts",
+    "start": "node runts.jsscript",
     "start-help": "npm run start --file=permutation",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
