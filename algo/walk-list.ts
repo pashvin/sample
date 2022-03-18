@@ -29,6 +29,11 @@ TNode.print(head);
 
 console.log('Level search path');
 
-console.log(TNode.BFSearch(head));
+console.log(TNode.BFSearch(head).toString());
+
+console.log('Depth search path');
+let output = [];
+TNode.DFSearch(head,output);
+console.log(output.toString());
 
 

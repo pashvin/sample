@@ -28,8 +28,11 @@ export class TNode {
     }
   }
 
-  // Depth search 
-  public static DFSearch(rootNode: TNode) {
+  // Depth search
+  public static DFSearch(rootNode: TNode, visitPath = []) {
+    visitPath.push(rootNode.data);
+    if(rootNode.left) this.DFSearch(rootNode.left,visitPath);
+    if(rootNode.right) this.DFSearch(rootNode.right,visitPath);
   }
 
   // Level search = Breath first
@@ -49,8 +52,8 @@ export class TNode {
       // Create a reference to currentNode, at the top of the queue.
       var currentNode = queue[0];
 
-      if(!currentNode) {
-          return visitingPath;
+      if (!currentNode) {
+        return visitingPath;
       }
 
       visitingPath.push(currentNode.data);
