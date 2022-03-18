@@ -1,7 +1,7 @@
 To run any algorithm file use following example
 
-npm i (only first time)
-npm run start --file=permutation (file name without .js extension)
+1. npm i (only first time)
+2.  npm run start --file=permutation (file name without .js extension)
 
 How it works?
 
