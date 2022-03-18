@@ -1,6 +1,6 @@
 import { TNode } from "./tree-node";
 
-let data = {
+let treeData = {
   value: 1,
   left : {
     value: 2,
@@ -22,7 +22,7 @@ let data = {
   }
 }
 
-let head = TNode.parseData(data);
+let head = TNode.parseData(treeData);
 
 console.log('Original:');
 TNode.print(head);
