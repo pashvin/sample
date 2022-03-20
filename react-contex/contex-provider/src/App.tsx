@@ -1,38 +1,73 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useContext, useEffect, useState } from "react";
 import "./App.css";
 
-const TimeContext = React.createContext({ time: "Time1" });
-const ThemeContext = React.createContext({ theme: "black" });
+// create context
+const TimeContext = React.createContext({
+  time: "",
+  setDate: (data: any) => {},
+});
 
-class Time extends React.Component {
-  static contextType = TimeContext;
-  // find out how to use second context in this class
+const ThemeContext = React.createContext({
+  theme: "",
+  toggleTheme: () => {},
+});
 
-  componentDidMount() {}
+//create provider
+const TimeProvider = ({ children }: any) => {
+  const [time, setTime] = useState("init");
+  const setDateHook = (data: any) => setTime(data);
+  return (
+    <TimeContext.Provider value={{ time: time, setDate: setDateHook }}>
+      {children}
+    </TimeContext.Provider>
+  );
+};
 
-  componentWillUnmount() {}
+const ThemeProvider = ({ children }: any) => {
+  const [theme, toggleTheme] = useState("black");
+  const toggleThemeFn = () => {
+    toggleTheme(theme == "black" ? "light" : "black");
+  };
+  return (
+    <ThemeContext.Provider value={{ theme: theme, toggleTheme: toggleThemeFn }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
 
-  render() {
-    const timeData = this.context;
-    return <div>The time is {timeData.time}</div>;
-  }
+// Child component to test context
+function Time() {
+  const timeContext = useContext(TimeContext);
+  const themeContext = useContext(ThemeContext);
+
+  useEffect(() => {
+    let timer = setInterval((_) => {
+      let date = new Date();
+      timeContext.setDate(date.toString());
+    }, 1000);
+    return function cleanup() {
+      if (timer) {
+        clearInterval(timer);
+      }
+    };
+  }, []);
+
+  return (
+    <div>
+      The time is {timeContext.time} {themeContext.theme}
+    </div>
+  );
 }
 
-class App extends React.Component {
-  render() {
-    return (
-      <ThemeContext.Provider value={{ theme: "blue" }}>
-        <TimeContext.Provider value={{ time: "Time2" }}>
-          <div className="App">
-            <header className="App-header">
-              <Time></Time>
-            </header>
-          </div>
-        </TimeContext.Provider>
-      </ThemeContext.Provider>
-    );
-  }
+// Main app to setup context.
+function App() {
+  return (
+    <ThemeProvider>
+      <TimeProvider>
+        <Time></Time>
+      </TimeProvider>
+    </ThemeProvider>
+  );
 }
 
 export default App;
