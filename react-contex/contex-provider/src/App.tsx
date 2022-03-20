@@ -4,7 +4,7 @@ import "./App.css";
 // create context
 const TimeContext = React.createContext({
   time: "",
-  setDate: (data: any) => {},
+  setTime: (data: any) => {},
 });
 
 const ThemeContext = React.createContext({
@@ -15,9 +15,9 @@ const ThemeContext = React.createContext({
 //create provider
 const TimeProvider = ({ children }: any) => {
   const [time, setTime] = useState("init");
-  const setDateHook = (data: any) => setTime(data);
+  const setTimeHook = (data: any) => setTime(data);
   return (
-    <TimeContext.Provider value={{ time: time, setDate: setDateHook }}>
+    <TimeContext.Provider value={{ time: time, setTime: setTimeHook }}>
       {children}
     </TimeContext.Provider>
   );
@@ -35,6 +35,16 @@ const ThemeProvider = ({ children }: any) => {
   );
 };
 
+const ComposeProviders = ({ providers = [], children }: any) => {
+  return (
+    <>
+      {providers.reduceRight((Accumulator: any, Current: any) => {
+        return <Current>{Accumulator}</Current>;
+      }, children)}
+    </>
+  );
+};
+
 // Child component to test context
 function Time() {
   const timeContext = useContext(TimeContext);
@@ -43,7 +53,7 @@ function Time() {
   useEffect(() => {
     let timer = setInterval((_) => {
       let date = new Date();
-      timeContext.setDate(date.toString());
+      timeContext.setTime(date.toString());
     }, 1000);
     return function cleanup() {
       if (timer) {
@@ -62,11 +72,9 @@ function Time() {
 // Main app to setup context.
 function App() {
   return (
-    <ThemeProvider>
-      <TimeProvider>
-        <Time></Time>
-      </TimeProvider>
-    </ThemeProvider>
+    <ComposeProviders providers={[TimeProvider, ThemeProvider]}>
+      <Time></Time>
+    </ComposeProviders>
   );
 }
 
