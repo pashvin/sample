@@ -11,13 +11,14 @@ export class AppComponent {
 
   openWindow(event:Event) {
 debugger;
-    const electron = (<any>window).require('electron');
-    const remote = electron.BrowserWindow.getAllWindows()[0];
+
+    const mainWin = (<any>window).require('electron').ipcRenderer;
+
+    mainWin.invoke('some-name', '').then((result:any) => {
+      result + '';
+    })
     
-    electron.dialog.showMessageBox (remote, {
-      type: "warning",
-      message: "You have been warned.",
-      buttons: ["OK"]
-    });
+    debugger;
+   
   }
 }
