@@ -1,6 +1,7 @@
 const {
   app,
   BrowserWindow,
+  BrowserView,
   globalShortcut,
   ipcMain,
   dialog,
@@ -9,6 +10,7 @@ const url = require("url");
 const path = require("path");
 
 let mainWindow;
+let mainView;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -17,7 +19,8 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
-      contextIsolation: false,
+      contextIsolation: true,
+      preload: path.join(__dirname, `/preload.js`),
     },
   });
 
@@ -38,6 +41,16 @@ function createWindow() {
     mainWindow.openDevTools({ detached: true });
     mainWindow.webContents.openDevTools({ detached: true });
   });
+
+  mainView = new BrowserView();
+  mainWindow.setBrowserView(mainView);
+  mainView.setBounds({
+    x: 105,
+    y: 0,
+    width: mainWindow.getBounds().width - 105,
+    height: mainWindow.getBounds().height,
+  });
+  mainView.setBackgroundColor("#56cc5b10");
 }
 
 app.on("ready", createWindow);
@@ -50,11 +63,7 @@ app.on("activate", function () {
   if (mainWindow === null) createWindow();
 });
 
-ipcMain.handle("some-name", async (event, arg) => {
-  dialog.showMessageBox(mainWindow, {
-    type: "warning",
-    message: "You have been warned.",
-    buttons: ["OK"],
-  });
+ipcMain.handle("openTab", async (event, arg) => {
+  mainView?.webContents.loadURL(arg);
   return 0;
 });
