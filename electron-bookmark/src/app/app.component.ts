@@ -11,9 +11,17 @@ export class AppComponent {
 
   constructor() {}
 
-  openWindow(event: Event) {
+  openWindowGoogle(event: Event) {
     this.mainElectronWnd
       .doAction('https://www.google.com')
+      .then((result: any) => {
+        console.log(result);
+      });
+  }
+
+  openWindowCNN(event: Event) {
+    this.mainElectronWnd
+      .doAction('https://www.cnn.com')
       .then((result: any) => {
         console.log(result);
       });
