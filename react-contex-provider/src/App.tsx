@@ -24,9 +24,9 @@ const TimeProvider = ({ children }: any) => {
 };
 
 const ThemeProvider = ({ children }: any) => {
-  const [theme, toggleTheme] = useState("black");
+  const [theme, toggleTheme] = useState("pink");
   const toggleThemeFn = () => {
-    toggleTheme(theme == "black" ? "light" : "black");
+    toggleTheme(theme == "pink" ? "yellow" : "pink");
   };
   return (
     <ThemeContext.Provider value={{ theme: theme, toggleTheme: toggleThemeFn }}>
@@ -46,7 +46,7 @@ const ComposeProviders = ({ providers = [], children }: any) => {
 };
 
 // Child component to test context
-function Time() {
+function TimeDisplay() {
   const timeContext = useContext(TimeContext);
   const themeContext = useContext(ThemeContext);
 
@@ -63,17 +63,28 @@ function Time() {
   }, []);
 
   return (
-    <div>
-      The time is {timeContext.time} {themeContext.theme}
+    <div
+      style={{
+        backgroundColor: themeContext.theme == "pink" ? "pink" : "yellow"
+      }}
+    >
+      The time is {timeContext.time}
     </div>
   );
+}
+
+function ThemeSelector() {
+  const themeContext = useContext(ThemeContext);
+
+  return <button onClick={themeContext.toggleTheme}>Toggle Theme</button>;
 }
 
 // Main app to setup context.
 function App() {
   return (
     <ComposeProviders providers={[TimeProvider, ThemeProvider]}>
-      <Time></Time>
+      <TimeDisplay></TimeDisplay>
+      <ThemeSelector></ThemeSelector>
     </ComposeProviders>
   );
 }
