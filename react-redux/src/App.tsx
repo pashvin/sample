@@ -27,7 +27,7 @@ const TimeStore = createStore(TimeReducer);
 const TimeContext = React.createContext<ReactReduxContextValue>({} as any);
 const ThemeContext = React.createContext<ReactReduxContextValue>({} as any);
 
-//create provider
+//create provider because we have two diff store.
 const TimeProvider = ({ children }: any) => {
   return (
     <Provider store={TimeStore} context={TimeContext}>
@@ -58,9 +58,11 @@ const ComposeProviders = ({ providers = [], children }: any) => {
 function TimeDisplay() {
   const timeContext = useContext(TimeContext);
   const themeContext = useContext(ThemeContext);
-  const [localTheme, setLocalTheme] = useState(
-    themeContext.store.getState().theme
-  );
+
+  // There must be a way to monitor redux store data.
+  // if there is a single store , then we can use selector but
+  // for multiple store find out how to use selector.
+  const [localTheme, setLocalTheme] = useState(themeContext.store.getState().theme);
   const [localTime, setLocalTime] = useState(timeContext.store.getState().time);
 
   const updateTime = async () => {
