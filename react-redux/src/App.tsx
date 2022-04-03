@@ -1,21 +1,21 @@
-import React, { useContext, useEffect, useState, createContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { createStore } from "redux";
-import { Provider, ReactReduxContextValue } from "react-redux";
+import { Provider, ReactReduxContextValue, useSelector } from "react-redux";
 import "./App.css";
 
 // create reduce
-const TimeReducer = (state: any, action: any) => {
+const TimeReducer = (state = { time: "" }, action: any) => {
   if (action.time) {
-    state = action.time;
+    state.time = action.time;
   }
   return state;
 };
 
-const ThemeReducer = (state: any, action: any) => {
-  if (state == "pink") {
-    state = "yellow";
+const ThemeReducer = (state = { theme: "pink" }, action: any) => {
+  if (state.theme == "pink") {
+    state.theme = "yellow";
   } else {
-    state = "pink";
+    state.theme = "pink";
   }
   return state;
 };
@@ -58,6 +58,10 @@ const ComposeProviders = ({ providers = [], children }: any) => {
 function TimeDisplay() {
   const timeContext = useContext(TimeContext);
   const themeContext = useContext(ThemeContext);
+  const [localTheme, setLocalTheme] = useState(
+    themeContext.store.getState().theme
+  );
+  const [localTime, setLocalTime] = useState(timeContext.store.getState().time);
 
   const updateTime = async () => {
     let date = new Date();
@@ -71,9 +75,21 @@ function TimeDisplay() {
     let timer = setInterval((_) => {
       updateTime();
     }, 1000);
+    const themeUnSub = themeContext.store.subscribe(() => {
+      setLocalTheme(themeContext.store.getState().theme);
+    });
+    const timeUnSub = timeContext.store.subscribe(() => {
+      setLocalTime(timeContext.store.getState().time);
+    });
     return function cleanup() {
       if (timer) {
         clearInterval(timer);
+      }
+      if (themeUnSub) {
+        themeUnSub();
+      }
+      if (timeUnSub) {
+        timeUnSub();
       }
     };
   }, []);
@@ -81,10 +97,10 @@ function TimeDisplay() {
   return (
     <div
       style={{
-        backgroundColor: themeContext.storeState == "pink" ? "pink" : "yellow",
+        backgroundColor: localTheme == "pink" ? "pink" : "yellow",
       }}
     >
-      The time is {timeContext.storeState} {themeContext.storeState}
+      The time is {localTime}
     </div>
   );
 }
