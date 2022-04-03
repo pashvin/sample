@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+This project shows how to use multiple redux store with each one having own reducer.
+Having reducer provides single place to manage state but if we keep one store, then reducer become heavy.
+This example shows multiple store and each one has it's own reducer.
+
 ## Available Scripts
 
 In the project directory, you can run:
