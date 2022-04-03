@@ -3,7 +3,9 @@ import { createStore } from "redux";
 import { Provider, ReactReduxContextValue, useSelector } from "react-redux";
 import "./App.css";
 
-// create reduce
+// create reduce. Advantage of redux pattern is state logic is maintained 
+// in a single place. Two separate out each one you can have multiple stores
+// and each one can have own reducer  
 const TimeReducer = (state = { time: "" }, action: any) => {
   if (action.time) {
     state.time = action.time;
