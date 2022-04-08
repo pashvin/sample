@@ -86,6 +86,7 @@ function TimeDisplay() {
       setLocalTime(timeContext.store.getState().time);
     });
     return function cleanup() {
+      console.log('cleanup');
       if (timer) {
         clearInterval(timer);
       }
@@ -96,7 +97,7 @@ function TimeDisplay() {
         timeUnSub();
       }
     };
-  }, []);
+  }, []); // pass second arg as [] to avoid redraw on set status
 
   return (
     <div
