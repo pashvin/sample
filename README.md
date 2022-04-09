@@ -1,4 +1,7 @@
-# sample applications and algorithm repo
+# About Me
+I work in a small company which is in communication and collobration software product provider. My role is a client side lead or architecture. My main responsibility includes providing solution for the business problem (no matter which client side framework is used) and keep client side software performative and keep client side code managable/extendable. Event I spend most of my time on design, creating user stories, managing store execution, time to time I have to create POC and help junior software developer to solve programing issues so I do code (which is Fun). But it is hard to keep remembering every diff framework syntax when you are working in many different one. To solve that issue, I created this repo which allows me to refer back when I needed and also can work as show case of the area where I already worked. 
+
+# About Repo
 
 This repo is a playground of many sample apps and algorithms which I developed on my own way.
 I wrote those as I understand those process and make is simple for my own understanding.
@@ -6,12 +9,14 @@ It may not be the best way to write the way I did but it shows how I understood 
 In some cases I created own problem and came up with own solution.
 For example I wanted to write algorithms in Typescript but wanted to execute it directly from console.
 For that I created JS file which complies selected algorithm file and execute and print output on console.
+There are also example of Rect, Angular and Electron's key features
 
 # algo project
 Few algorithms example like permutations, tree and list using TypeScript.
 
 # electron-bookmark project
-Shows how web app within Electron shell communicate securely with shell. Also shows BrowserWindows placement example.
+When I designed Electron based project during Electron version 6.x/7.x, I used Electron as a thin shell and kept all login in hosted web app.
+During that desing, main focus was to not interrupt  
 
 # Game project
 Sample game developed in Angular and Rect. At this point I put logic in Angular service but in React I kept logic inside
