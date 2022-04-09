@@ -1,9 +1,13 @@
 <div class="main">
-  <div class="sidebar"></div>
+  <div class="sidebar">
+    <app-selector></app-selector>
+  </div>
   <div class="wrapper">
     <div class="playground">
-      <router-outlet></router-outlet>
+      <app-patterns></app-patterns>
     </div>
-    <div class="logger">Logger</div>
+    <div class="logger">
+      <app-logger></app-logger>
+    </div>
   </div>
 </div>
