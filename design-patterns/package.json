@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build:stats": "ng build --stats-json",
+    "build:stats": "ng build --stats-json --named-chunks",
     "build:analyze": "webpack-bundle-analyzer dist/app/stats.json",
     "analyze": "(npm run build:stats) && (npm run build:analyze)"
   },
