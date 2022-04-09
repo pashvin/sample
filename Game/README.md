@@ -6,7 +6,7 @@ Ref: Please see pdf file in this folder to read about problem statement.
 Introduction:
 =============
 
-I am a primary Angular developer so I developed this game in Angular but also wanted to challenge my self to later replicated in React.
+I am a primary Angular developer so I developed this game in Angular but also wanted to challenge my self so later replicated in React.
 Please first see Angular project and then check React one.
 
 Environment:
