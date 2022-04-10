@@ -2,9 +2,10 @@
   "name": "microservice-jwt",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "jwt.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "help": "echo run command 'npm run start' to start server",
+    "start": "node jwt.js"
   },
   "keywords": [],
   "author": "",
