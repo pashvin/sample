@@ -26,12 +26,13 @@ app.use(session(sessionConfig));
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
-  res.send("try to use /create?username='abc' & /welcome /clear");
+  res.send("try to use /login?username=abc OR /welcome OR /logout");
 });
 
-app.get("/create", (req, res) => {
+// create Lambda can be in separate file
+app.get("/login", (req, res) => {
   if (!req.query.name) {
-    res.send("Please pass username in request like /create?name=yourname");
+    res.send("Please pass username in request like /login?name=yourname");
   }
   let jwtToken = jwt.sign({ user: req.query.name }, mySecret, {
     expiresIn: "1800s",
@@ -44,6 +45,7 @@ app.get("/create", (req, res) => {
   res.send("this will create a JWT and store in cookie");
 });
 
+// Welcome Lambda can be in separate file
 app.get("/welcome", (req, res) => {
   try {
     let decoded = jwt.verify(req.cookies.jwtToken, mySecret);
@@ -57,7 +59,8 @@ app.get("/welcome", (req, res) => {
   }
 });
 
-app.get("/clear", (req, res) => {
+// clear Lambda can be in separate file
+app.get("/logout", (req, res) => {
   res.clearCookie("jwtToken");
   res.send("This will clear JWT from cookie");
 });
