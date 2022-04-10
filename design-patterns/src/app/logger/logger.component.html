@@ -1,1 +1,6 @@
-<p>logger works!</p>
+<button (click)="clearLog()">Clear Log</button>
+<div class="log-list">
+  <div *ngFor="let item of logItems" class="log-item">
+    {{ item }}
+  </div>
+</div>

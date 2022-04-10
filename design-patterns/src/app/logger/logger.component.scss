@@ -1,0 +1,23 @@
+.log-list {
+    height: 95%;
+    overflow: scroll;
+    
+}
+
+.log-list::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.log-list::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+
+.log-list::-webkit-scrollbar:horizontal {
+    height: 11px;
+}
+
+.log-list::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    border: 2px solid white; 
+    background-color: rgba(0, 0, 0, .5);
+}
