@@ -5,7 +5,7 @@ I work in a small company that is in communication and collaboration software pr
 
 This repo is a playground of many sample apps and algorithms which I developed in my own way. I wrote those as I understand those processes and make them simple for my own understanding. It may not be the best way to write the way I did but it shows how I understood it. In some cases, I created my own problem and came up with my own solution. For example, I wanted to write algorithms in Typescript but wanted to execute them directly from the console. For that, I created a JS file that complies selected algorithm file and execute and prints output on the console. There are also examples of Rect, Angular, and Electron's key features.
 
-# algo project
+# algorithms project
 Few algorithms example permutations, trees, and lists using TypeScript.
 
 # electron-bookmark project
