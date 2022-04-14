@@ -1,0 +1,6 @@
+.list-group-item {
+    cursor: pointer;
+}
+.note-selected {
+    background-color: yellow !important;
+}

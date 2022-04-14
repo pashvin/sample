@@ -1,0 +1,85 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h3>Notepad App</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="list-group">
+                <div
+                    class="list-group-item note"
+                    *ngFor="let note of notes"
+                    (click)="selectNote(note)"
+                >
+                    <div  [ngClass]="isNoteSelected(note.id) ? 'note-selected' : ''">{{ note.id }}-{{ note.title }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div *ngIf="this.editedNote">
+                <form>
+                    <div class="form-group">
+                        <label
+                            >Title:
+                            <input
+                                class="note-title form-control"
+                                name="title"
+                                [(ngModel)]="editedNote.title"
+                                required
+                        /></label>
+                        <div class="form-error">Field is required</div>
+                    </div>
+                    <div class="form-group">
+                        <label
+                            >Note:
+                            <textarea
+                                class="note-body form-control"
+                                name="body"
+                                [(ngModel)]="editedNote.body"
+                            ></textarea>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label
+                            >favorite:
+                            <input
+                                type="checkbox"
+                                class="note-favorite"
+                                name="favorite"
+                                [(ngModel)]="editedNote.favorite"
+                        /></label>
+                    </div>
+                    <div class="form-group">
+                        <label
+                            >Color:
+                            <input
+                                type="color"
+                                class="note-color"
+                                name="color"
+                                [(ngModel)]="editedNote.color"
+                        /></label>
+                    </div>
+                    <div class="form-group">
+                        <button
+                            class="btn btn-success note-save"
+                            (click)="saveNote()"
+                        >
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div>
+                Please select note or
+                <a
+                    href="javascript: void(0);"
+                    class="note-new"
+                    (click)="editToggle()"
+                    >click here to create new one</a
+                >
+            </div>
+        </div>
+    </div>
+</div>
