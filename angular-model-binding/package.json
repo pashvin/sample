@@ -1,5 +1,5 @@
 {
-  "name": "devskiller-angular-notepad-app",
+  "name": "angular-notepad-app",
   "private": true,
   "scripts": {
     "ng": "ng",
