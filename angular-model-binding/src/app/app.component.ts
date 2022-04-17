@@ -26,8 +26,14 @@ export class AppComponent {
         return id === this.editedNote['id']
     }
 
+    get editedObject(): string {
+        if(this.editedNote) {
+            return JSON.stringify(this.editedNote);
+        }
+    }
+
     newNote() {
-        this.editedNote = createNewNote()
+        this.editedNote = this.createNewNote()
     }
 
     saveNote(note: Note | NewNote) {
@@ -76,8 +82,4 @@ export class AppComponent {
     createNewNote(): NewNote {
         return { title: '', body: '', color: '', favorite: false }
     }
-}
-
-function createNewNote(): NewNote {
-    return { title: '', body: '', color: '', favorite: false }
 }
