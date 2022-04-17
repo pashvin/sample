@@ -14,8 +14,28 @@ export class Pattern3Component implements OnInit {
   }
 
   run() {
-    this.logger.addLog("Pending implementation")
+    let calendar: ICalendar;
+    calendar = new MSOffice();
+    this.logger.addLog(calendar.getList().toString());
+    calendar = new GoogleWorkspace();
+    this.logger.addLog(calendar.getList().toString());
   }
 
+}
+
+interface ICalendar {
+  getList():string[];
+}
+
+class MSOffice implements ICalendar {
+  public getList(): string[] {
+    return ['List from MS Office calendar'];
+  }
+}
+
+class GoogleWorkspace implements ICalendar {
+  public getList(): string[] {
+    return ['List from GoogleWorkspace calendar'];
+  }
 }
 

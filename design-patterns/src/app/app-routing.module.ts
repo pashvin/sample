@@ -18,6 +18,11 @@ const routes: Routes = [
     loadChildren: () =>
       import("./routes/pattern3/pattern3.module").then((m) => m.Pattern3Module),
   },
+  {
+    path: "Factory",
+    loadChildren: () =>
+      import("./routes/pattern4/pattern4.module").then((m) => m.Pattern4Module),
+  },
 ];
 
 @NgModule({
