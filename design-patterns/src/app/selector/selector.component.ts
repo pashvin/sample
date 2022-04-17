@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class SelectorComponent implements OnInit {
 
   private selectionList = [
-    "first",
-    "second"
+    "Adapter",
+    "Singleton"
   ];
 
   constructor() { }

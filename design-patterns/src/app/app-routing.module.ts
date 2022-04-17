@@ -4,14 +4,14 @@ import { Pattern1Component } from "./routes/pattern1/pattern1.component";
 import { Pattern2Component } from "./routes/pattern2/pattern2.component";
 
 const routes: Routes = [
-  { path: "", redirectTo: "/second", pathMatch: "full" },
+  { path: "", redirectTo: "/Adapter", pathMatch: "full" },
   {
-    path: "first",
+    path: "Adapter",
     loadChildren: () =>
       import("./routes/pattern1/pattern1.module").then((m) => m.Pattern1Module),
   },
   {
-    path: "second",
+    path: "Singleton",
     loadChildren: () =>
       import("./routes/pattern2/pattern2.module").then((m) => m.Pattern2Module),
   },
