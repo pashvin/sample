@@ -13,7 +13,7 @@ export class Pattern1Component implements OnInit {
   ngOnInit(): void {}
 
   run() {
-    let adp = new Adaptee(this.logger);
+    let adp = new Adoptee(this.logger);
     adp.eventReceivedWithoutAdapter("<message><sender>John</sender></message");
     adp.eventReceivedWithAdapter("<message><sender>John</sender></message");
   }
@@ -47,7 +47,7 @@ class Adapter extends Target {
   }
 }
 
-class Adaptee {
+class Adoptee {
 
   private tg: Target;
   private tga: Adapter;
