@@ -9,7 +9,8 @@ export class SelectorComponent implements OnInit {
 
   private selectionList = [
     "Adapter",
-    "Singleton"
+    "Singleton",
+    "Bridge"
   ];
 
   constructor() { }
