@@ -72,9 +72,23 @@ registerRoute(
 // This allows the web app to trigger skipWaiting via
 // registration.waiting.postMessage({type: 'SKIP_WAITING'})
 self.addEventListener('message', (event) => {
+  // This will auto update application
+  // if you want to give control to user and prompt for update
+  // then add hook in status change and wait for user click before
+  // calling skipWaiting
+  // registration.installing.addEventListener('statechange', () => {
+  //  if (registration.waiting) {
+
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
 });
+
+// you can implement catching data logic here
+// self.addEventListener('fetch', (event) => {
+//   event.respondWith(
+//     caches.match(event.request)
+//   );
+// });
 
 // Any other custom service worker logic can go here.

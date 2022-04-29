@@ -1,0 +1,13 @@
+.install-prompt{
+    width: 100%;
+    color: red;
+    margin: auto;
+    text-align: center;
+}
+
+.install-note{
+    width: 100%;
+    color: green;
+    margin: auto;
+    text-align: center;
+}
