@@ -32,9 +32,11 @@ function App() {
       return <div className="install-note">You are already in the app. Check the app icon for badge count demo.</div>
     }
     if(!installed) {
-      return (<div className="install-prompt">Please install this PWA app to see Badge count demo</div>)
+      return (<div className="install-prompt">Please install this PWA app to see Badge count demo. 
+      Already in the app but still see this message? That may happen when app is launched by installer. 
+      Just restart app one time to fix it </div>)
     } else {
-      return (<div className="install-prompt">Please use installed PWA app to see Badge count demo</div>)
+      return (<div className="install-prompt">Please use installed PWA app to see Badge count demo.</div>)
     }
   }
 
