@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState } from 'react';
 import './App.css';
+import AppRouter from "./AppRouter"
 
 declare const navigator: any; 
 
@@ -58,6 +58,7 @@ function App() {
   return (
     <div >
       <div>{installPrompt()}</div>
+      <AppRouter/>
     </div>
   );
 }
