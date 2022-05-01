@@ -15,7 +15,7 @@ export default function GoogleChat() {
           res("loaded");
         };
       }
-      res("already loaded");
+      res("re-loaded");
     });
   };
 
