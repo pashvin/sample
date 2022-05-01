@@ -36,7 +36,7 @@ export default function AppRouter() {
     <BrowserRouter>
       <NavigationLink />
       <Routes>
-        <Route path="/" element={<Navigate replace to="/d3" />} />
+        <Route path="/" element={<Navigate replace to="/google" />} />
         <Route path="/d3" element={<DynamicLoader component="d3js" />} />
         <Route path="/chart" element={<DynamicLoader component="chartjs" />} />
         <Route path="/google" element={<DynamicLoader component="google" />} />
