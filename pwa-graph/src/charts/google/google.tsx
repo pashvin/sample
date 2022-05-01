@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
-declare const google: any; 
+declare const google: any;
 
 export default function GoogleChat() {
   const loadScript = () => {
@@ -14,51 +14,58 @@ export default function GoogleChat() {
         script.onload = () => {
           res("loaded");
         };
+      } else {
+        res("re-loaded");
       }
-      res("re-loaded");
     });
   };
 
   const createGraph = () => {
-    google.charts.load('current', {'packages':['corechart']});
+    if (!google) {
+      alert("library is not yet ready");
+    }
+
+    google.charts.load("current", { packages: ["corechart"] });
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
       var data = google.visualization.arrayToDataTable([
-        ['Year', 'Sales', 'Expenses'],
-        ['2004',  1000,      400],
-        ['2005',  1170,      460],
-        ['2006',  660,       1120],
-        ['2007',  1030,      540]
+        ["Year", "Sales", "Expenses"],
+        ["2004", 1000, 400],
+        ["2005", 1170, 460],
+        ["2006", 660, 1120],
+        ["2007", 1030, 540],
       ]);
 
       var options = {
-        title: 'Company Performance',
-        curveType: 'function',
-        legend: { position: 'bottom' }
+        title: "Company Performance",
+        curveType: "function",
+        legend: { position: "bottom" },
       };
 
-      var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+      var chart = new google.visualization.LineChart(
+        document.getElementById("curve_chart")
+      );
 
       chart.draw(data, options);
     }
-  }
+  };
 
   useEffect(() => {
-    // React 18 loads, unload , reload component in debug mode o detect 
+    // React 18 loads, unload , reload component in debug mode o detect
     // leaks. This is workaround to call useEffect only once
-    let timer = setInterval(_=>{
-        clearInterval(timer);
-        loadScript().then(result=> {
-            createGraph();
-        });
-    },1000);
+    let timer = setInterval((_) => {
+      clearInterval(timer);
+      loadScript().then((result) => {
+        createGraph();
+      });
+    }, 1000);
     return function cleanup() {
-      if(timer) {
-          clearInterval(timer);
+      if (timer) {
+        clearInterval(timer);
       }
     };
   }, []); // pass second arg as [] to avoid redraw on set status
 
-  return  <div id="curve_chart" style={{width:900, height:500}}></div>;
+  return <div id="curve_chart" style={{ width: 900, height: 500 }}></div>;
 }
