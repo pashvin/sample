@@ -67,7 +67,6 @@ export default function ChartJS() {
     let timer = setInterval((_) => {
       clearInterval(timer);
       loadScript().then((result) => {
-          debugger;
         createGraph();
       });
     }, 1000);
