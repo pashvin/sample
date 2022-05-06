@@ -79,6 +79,10 @@ function TimeDisplay() {
     let timer = setInterval((_) => {
       updateTime();
     }, 1000);
+
+    // for single store , you can use connect or userSelector 
+    // but for multiple store you will have to subscribe for 
+    // update manually. It is very inconvenient so there must be a better way.
     const themeUnSub = themeContext.store.subscribe(() => {
       setLocalTheme(themeContext.store.getState().theme);
     });
