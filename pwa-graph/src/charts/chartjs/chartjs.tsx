@@ -20,43 +20,40 @@ export default function ChartJS() {
     });
   };
 
-  const createGraph = () => {
-    const ctxElm: HTMLCanvasElement = document.getElementById("myChart") as HTMLCanvasElement;
-    const ctx = ctxElm && ctxElm.getContext('2d');
+  const createGraph = async () => {
+    const ctxElm: HTMLCanvasElement = document.getElementById(
+      "myChart"
+    ) as HTMLCanvasElement;
+    const ctx = ctxElm && ctxElm.getContext("2d");
+
+    const xlabel: any = [];
+    const ytemp: any = [];
+
+    const response = await fetch("./data/alphavantage.co-stock.csv");
+    const data = await response.text();
+    const table = data.split("\n").slice(1);
+    table.forEach((row) => {
+      const columns = row.split(",");
+      const year = columns[0];
+      xlabel.push(year);
+      const temp = columns[4];
+      ytemp.push(parseFloat(temp) + 14);
+    });
+
     const myChart = new Chart(ctx, {
-      type: "bar",
+      type: "line",
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: xlabel,
         datasets: [
           {
-            label: "# of Votes",
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 206, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(255, 159, 64, 0.2)",
-            ],
-            borderColor: [
-              "rgba(255, 99, 132, 1)",
-              "rgba(54, 162, 235, 1)",
-              "rgba(255, 206, 86, 1)",
-              "rgba(75, 192, 192, 1)",
-              "rgba(153, 102, 255, 1)",
-              "rgba(255, 159, 64, 1)",
-            ],
+            label: "some data",
+            data: ytemp,
+            fill: false,
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
+            borderColor: "rgba(255, 99, 132, 1)",
             borderWidth: 1,
           },
         ],
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-          },
-        },
       },
     });
   };
@@ -76,5 +73,5 @@ export default function ChartJS() {
       }
     };
   }, []); // pass second arg as [] to avoid redraw on set status
-  return (<canvas id="myChart" style={{ width: 900, height: 500 }}></canvas>);
+  return <canvas id="myChart" style={{ width: 900, height: 500 }}></canvas>;
 }
