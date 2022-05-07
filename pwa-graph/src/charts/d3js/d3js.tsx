@@ -20,67 +20,87 @@ export default function D3js() {
     });
   };
 
-  const createGraph = () => {
-    const margin = { top: 10, right: 10, bottom: 50, left: 50 };
-    const width = 1280 - margin.left - margin.right;
-    const height = 420 - margin.top - margin.bottom;
-    const yMax = 10;
-    const n = 20; // Number of datapoints
-  
-    // X scale
-    const xScale = d3
-      .scaleLinear()
-      .domain([0, n - 1]) // input
-      .range([0, width]); // output
-  
-    // Y scale
-    const yScale = d3
-      .scaleLinear()
-      .domain([0, yMax]) // input
-      .range([height, 0]); // output
-  
-    const dataset = d3.range(n).map((d:any) => {
-      return { x: d, y: d3.randomUniform(yMax)() };
+  const createGraph = async () => {
+    var parseDate = d3.timeParse("%Y-%m-%d");
+
+    var margin = { left: 50, right: 20, top: 20, bottom: 50 };
+
+    var width = 960 - margin.left - margin.right;
+    var height = 500 - margin.top - margin.bottom;
+
+    var max = 0;
+    var min = 0;
+
+    var xNudge = 50;
+    var yNudge = 20;
+
+    var minDate = new Date();
+    var maxDate = new Date();
+
+    let data = await d3.csv("./data/alphavantage.co-stock.csv");
+
+    data.forEach(function (d: any) {
+      d.timestamp = parseDate(d.timestamp);
     });
-  
-    const svg = d3
-      .select("#d3js_chart")
-      //.append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom);
-  
-    // X axis
-    svg
-      .append("g")
-      .attr("class", "axis x-axis")
-      .attr(
-        "transform",
-        "translate(" + margin.left + "," + (height + margin.top) + ")"
-      )
-      .call(d3.axisBottom(xScale));
-  
-    // Y Axis
-    svg
-      .append("g")
-      .attr("class", "axis y-axis")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-      .call(d3.axisLeft(yScale));
-  
-    // Line
-    const line = d3
-      .line()
-      .x((d:any) => xScale(d.x))
-      .y((d:any) => yScale(d.y));
-  
-    const lineWrapper = svg
-      .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-  
-    lineWrapper
-      .append("path")
-      .datum(dataset)
-      .attr("class", "line")
-      .attr("d", line);
+    {
+      max = d3.max(data, function (d: any) {
+        return d.close;
+      });
+      min = d3.min(data, function (d: any) {
+        return d.close;
+      });
+      minDate = d3.min(data, function (d: any) {
+        return d.timestamp;
+      });
+      maxDate = d3.max(data, function (d: any) {
+        return d.timestamp;
+      });
+
+      var y = d3.scaleLinear().domain([min, max]).range([height, 0]);
+
+      var x = d3.scaleTime().domain([minDate, maxDate]).range([0, width]);
+
+      var yAxis = d3.axisLeft(y);
+
+      var xAxis = d3.axisBottom(x);
+
+      var line = d3
+        .line()
+        .x(function (d: any) {
+          return x(d.timestamp);
+        })
+        .y(function (d: any) {
+          return y(d.close);
+        })
+        .curve(d3.curveCardinal);
+
+      var svg = d3
+        .select("#d3js_chart")
+        .append("svg")
+        .attr("id", "svg")
+        .attr("height", "100%")
+        .attr("width", "100%");
+
+      var chartGroup = svg
+        .append("g")
+        .attr("class", "chartGroup")
+        .attr("transform", "translate(" + xNudge + "," + yNudge + ")");
+
+      chartGroup
+        .append("path")
+        .attr("class", "line")
+        .attr("d", function (d: any) {
+          return line(data);
+        });
+
+      chartGroup
+        .append("g")
+        .attr("class", "axis x")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+      chartGroup.append("g").attr("class", "axis y").call(yAxis);
+    }
   };
 
   useEffect(() => {
@@ -99,5 +119,5 @@ export default function D3js() {
     };
   }, []); // pass second arg as [] to avoid redraw on set status
 
-  return <svg id="d3js_chart" style={{ width: 900, height: 500 }}></svg>;
+  return <div id="d3js_chart" style={{ width: 900, height: 500 }}></div>;
 }
