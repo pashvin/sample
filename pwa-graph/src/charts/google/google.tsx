@@ -29,25 +29,45 @@ export default function GoogleChat() {
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
-      var data = google.visualization.arrayToDataTable([
-        ["Year", "Sales", "Expenses"],
-        ["2004", 1000, 400],
-        ["2005", 1170, 460],
-        ["2006", 660, 1120],
-        ["2007", 1030, 540],
-      ]);
-
-      var options = {
-        title: "Company Performance",
-        curveType: "function",
-        legend: { position: "bottom" },
+      var queryOptions = {
+        csvColumns: [
+          "datetime",
+          "number",
+          "number",
+          "number",
+          "number",
+          "number",
+          "number",
+          "number",
+        ],
+        csvHasHeader:
+          true /* This should be false if your CSV file doesn't have a header */,
       };
 
-      var chart = new google.visualization.LineChart(
-        document.getElementById("curve_chart")
+      var query = new google.visualization.Query(
+        "./data/alphavantage.co-stock.csv",
+        queryOptions
       );
+      query.send((resp: any) => {
+        var data = resp.getDataTable();
+        data.removeColumn(1);
+        data.removeColumn(1);
+        data.removeColumn(1);
+        data.removeColumn(2);
+        data.removeColumn(2);
+        data.removeColumn(2);
+        var options = {
+          title: "IBM Company Performance",
+          curveType: "function",
+          legend: { position: "bottom" },
+        };
 
-      chart.draw(data, options);
+        var chart = new google.visualization.LineChart(
+          document.getElementById("curve_chart")
+        );
+
+        chart.draw(data, options);
+      });
     }
   };
 
@@ -67,5 +87,5 @@ export default function GoogleChat() {
     };
   }, []); // pass second arg as [] to avoid redraw on set status
 
-  return <div id="curve_chart" style={{ width: 900, height: 500 }}></div>;
+  return <div id="curve_chart" style={{ width: 1900, height: 500 }}></div>;
 }
