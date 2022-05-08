@@ -79,9 +79,9 @@ self.addEventListener('message', (event) => {
   // registration.installing.addEventListener('statechange', () => {
   //  if (registration.waiting) {
 
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
+  // if (event.data && event.data.type === 'SKIP_WAITING') {
+  //   self.skipWaiting();
+  // }
 });
 
 // you can implement catching data logic here
