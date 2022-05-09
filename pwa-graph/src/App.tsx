@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
 import AppRouter from "./AppRouter";
 
@@ -9,18 +9,23 @@ function App() {
   // assume app is installed
   const [installed, setInstalled] = useState(true);
 
+  //function component can't store local variables
+  //best way to store using useRef
+  let deferredPrompt = useRef({} as any);
+
   const appInstallHandler = (e: any) => {
     e.preventDefault();
-    window.deferredPrompt = e;
+    deferredPrompt.current = e;
     // if app is not installed, then this callback will be called
     // set flag to false.
     setInstalled(false);
   };
 
   const InstallApp = () => {
-    window.deferredPrompt.prompt();
+    debugger;
+    deferredPrompt.current.prompt();
     // Wait for the user to respond to the prompt
-    window.deferredPrompt.userChoice.then((choiceResult: any) => {
+    deferredPrompt.current.userChoice.then((choiceResult: any) => {
       if (choiceResult.outcome === "accepted") {
         setInstalled(true);
       } else {
