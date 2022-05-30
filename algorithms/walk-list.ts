@@ -35,5 +35,3 @@ console.log('Depth search path');
 let output = [];
 TNode.DFSearch(head,output);
 console.log(output.toString());
-
-
