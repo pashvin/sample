@@ -27,11 +27,15 @@ let head = TNode.parseData(treeData);
 console.log('Original:');
 TNode.print(head);
 
-console.log('Level search path');
+console.log('Level search path - queue');
 
 console.log(TNode.BFSearch(head).toString());
 
-console.log('Depth search path');
+console.log('Depth search path - stack');
+
+console.log(TNode.DFSearch(head).toString());
+
+console.log('Depth search path - recursive');
 let output = [];
-TNode.DFSearch(head,output);
+TNode.DFSearchRecursive(head,output);
 console.log(output.toString());

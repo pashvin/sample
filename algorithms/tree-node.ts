@@ -29,16 +29,35 @@ export class TNode {
   }
 
   // Depth search
-  public static DFSearch(rootNode: TNode, visitPath = []) {
+  public static DFSearchRecursive(rootNode: TNode, visitPath = []) {
     visitPath.push(rootNode.data);
-    if(rootNode.left) this.DFSearch(rootNode.left,visitPath);
-    if(rootNode.right) this.DFSearch(rootNode.right,visitPath);
+    if (rootNode.left) this.DFSearchRecursive(rootNode.left, visitPath);
+    if (rootNode.right) this.DFSearchRecursive(rootNode.right, visitPath);
+  }
+
+  public static DFSearch(rootNode: TNode) {
+    let visitingPath = [];
+
+    // Create our queue and push our root node into it.
+    var stack = [rootNode];
+
+    // Continue searching through as queue as long as it's not empty.
+    while (stack.length > 0) {
+      // Create a reference to currentNode, at the top of the queue.
+      var currentNode = stack.pop();
+
+      if (currentNode) {
+        visitingPath.push(currentNode.data);
+        stack.push(currentNode.right, currentNode.left);
+      }
+    }
+    return visitingPath;
   }
 
   // Level search = Breath first
   public static BFSearch(rootNode: TNode) {
     let visitingPath = [];
-  
+
     // Create our queue and push our root node into it.
     var queue = [rootNode];
 
@@ -47,13 +66,11 @@ export class TNode {
       // Create a reference to currentNode, at the top of the queue.
       var currentNode = queue.shift();
 
-      if (!currentNode) {
-        return visitingPath;
+      if (currentNode) {
+        visitingPath.push(currentNode.data);
+        queue.push(currentNode.left, currentNode.right);
       }
-
-      visitingPath.push(currentNode.data);
-
-      queue.push(currentNode.left, currentNode.right);
     }
+    return visitingPath;
   }
 }
