@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <script type="text/javascript">
+    function fpsMeter(elm, refresh, callback) {
+      var last = new Date().getTime();
+
+      return function () {
+        var now = new Date().getTime();
+        fps = Math.round((1000 - (last - now)) * (60 / 1000));
+        last = now;
+        if (elm) elm.innerHTML = fps;
+        if (callback) callback.call(fps);
+      };
+    }
+  </script>
+
+  <body>
+   
+    <canvas id="canvasOrg"></canvas>
+
+    
+  </br>
+</br>
+  <div>
+    <button
+      onclick="{startStop();}"
+    >
+      Start/Stop</button
+    ><br />
+    <span id="fps">121</span> Updates/sec
+  </div>
+   
+
+    <script>
+      var globalID;
+      var SHOULDSTOP = false;
+      var f = fpsMeter(document.getElementById("fps"), 1);
+
+      window.onload = function () {
+        //setup the canvas size to the actual size.
+        canvasOrg.width = canvasOrg.clientWidth;
+        canvasOrg.height = canvasOrg.clientHeight;
+        loop();
+      };
+
+      //called as fast as it can
+      function loop() {
+        drawNoise();
+      }
+
+      function startStop() {
+        SHOULDSTOP=!SHOULDSTOP; requestAnimationFrame(drawNoise);
+      }
+
+      function drawNoise() {
+        f();
+        var context = canvasOrg.getContext("2d");
+        var pattern = context.createPattern(generatePattern(), "repeat");
+        context.rect(0, 0, canvasOrg.width, canvasOrg.height);
+        context.fillStyle = pattern;
+        context.fill();
+        if (!SHOULDSTOP) {
+          requestAnimationFrame(drawNoise);
+        }
+      }
+
+      //create a on memory canvas to generate a tile with 64x64 pixels of noise and return it
+      function generatePattern() {
+        var canvasOffline = document.createElement("canvas");
+        canvasOffline.width = 128;
+        canvasOffline.height = 128;
+        var context = canvasOffline.getContext("2d");
+        var image = context.getImageData(
+          0,
+          0,
+          canvasOffline.width,
+          canvasOffline.height
+        );
+        var imageData = image.data; // here we detach the pixels array from DOM
+
+        var p;
+        var pixels = canvasOffline.width * canvasOffline.height;
+        while (pixels--) {
+          p = pixels * 4;
+          imageData[p + 0] = Math.random() >= 0.5 ? 255 : 0; // Red
+          imageData[p + 1] = Math.random() >= 0.5 ? 255 : 0; // Green
+          imageData[p + 2] = Math.random() >= 0.5 ? 255 : 0; // Blue
+          imageData[p + 3] = 255; // Alpha
+        }
+
+        image.data = imageData;
+        context.putImageData(image, 0, 0);
+
+        return canvasOffline;
+      }
+    </script>
+  </body>
+</html>
