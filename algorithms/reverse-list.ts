@@ -7,12 +7,13 @@ LNode.print(head);
 
 let reverseNode = (head: LNode): LNode => {
   let current = head;
-  let prev = null;
+  let prev : LNode = null;
+  let next : LNode = null;
   while (current !== null) {
-    let temp = current.next;
+    next = current.next;
     current.next = prev;
     prev = current;
-    current = temp;
+    current = next;
   }
   return prev;
 };
