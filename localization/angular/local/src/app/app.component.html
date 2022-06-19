@@ -1,1 +1,16 @@
-Hello
+<div>Your current Language is : {{currentLanguage}}</div>
+<br />
+<div>
+  Select your app language:
+  <select name="languageInput" (change)="onSelectionChange($event)">
+    <option value="English">English</option>
+    <option value="Spanish">Spanish</option>
+  </select>
+</div>
+
+<div>
+    <br/>
+    <br/>
+    <div>El rápido zorro marrón salta sobre el perro perezoso.</div>
+    <div>The quick brown fox jumps over the lazy dog</div>
+</div>
