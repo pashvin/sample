@@ -25,7 +25,8 @@
             "inlineStyleLanguage": "sass",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/locale"
             ],
             "styles": [
               "src/styles.sass"
@@ -93,7 +94,8 @@
             "inlineStyleLanguage": "sass",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/locale"
             ],
             "styles": [
               "src/styles.sass"

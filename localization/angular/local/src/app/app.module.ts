@@ -6,13 +6,16 @@ import { AppComponent } from './app.component';
 
 import { LangService } from './lang.service';
 
+import { NgxTranslateModule } from './translete.module';
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxTranslateModule
   ],
   providers: [LangService],
   bootstrap: [AppComponent]
