@@ -14,7 +14,7 @@ export class LangService {
 
     public set currentLanguage(value:string) {
         this.lang = value;
-        this.translate.use(value === 'English' ? 'messages':'messages.es');
+        this.translate.use(value === 'English' ? 'en':'es');
     }
 
     public get currentLanguage(): string {
