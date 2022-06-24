@@ -40,7 +40,7 @@ const Selector = () => {
       <br />
       <div>
         Select your app language:
-        <select name="languageInput" onChange={onSelectionChange}>
+        <select className="LangInput" name="languageInput" onChange={onSelectionChange}>
           <option value="English">English</option>
           <option value="Spanish">Spanish</option>
         </select>
