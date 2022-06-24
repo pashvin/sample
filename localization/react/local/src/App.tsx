@@ -6,7 +6,9 @@ import ContextProviders from "./compo/ContextProvider";
 import { LangProvider } from "./compo/LangContext";
 import SampleTextDisplay from "./compo/SampleText";
 
+
 function App() {
+  
   return (
     <ContextProviders providers={[LangProvider]}>
       <div className="App">
