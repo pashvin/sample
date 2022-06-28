@@ -18,7 +18,7 @@ Sample game developed in Angular and Rect. At this point, I put logic in the Ang
 Learned that state is managed in store and there are no "services" like in Angular which is OK but then also did not like that we have one single store and all non-related state goes there so this project I used The Rect Context to keep each 
 state in diff context.
 
-# react-redux project
+# react-redux-provider project
 In the previous project, I started maintaining the state at a central place but the state update logic was not central. In this project, I learned how to use reducer to maintain logic at one place. Again single reducer for all unrelated logic is not good
 so I tried to make multiple store and multiple reducer so that way non-related business logic can be in diff reducers. Came across the issue of how to bind store data with the view. You can use "connect" to bind store to view property but that allows to bind with a single store and in this example, we have multiple stores. For time being I am using subscribe method.
 
