@@ -1,4 +1,4 @@
-import { Component, createSignal } from "solid-js";
+import { Component } from "solid-js";
 import { ServiceRegistry, useService } from "solid-services";
 import CounterService from "./service";
 
